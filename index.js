@@ -2,7 +2,8 @@
  * Created by apizzimenti on 4/2/16.
  */
 
-var chalk = require('chalk');
+var chalk = require('chalk'),
+    console = require('console');
 
 Array.prototype.removeIndex = function (index) {
     var length = this.length;
