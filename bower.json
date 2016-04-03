@@ -15,14 +15,14 @@
     "index",
     "value"
   ],
-  "homepage": "https://github.com/apizzimenti/array-functions",
+  "homepage": "https://github.com/apizzimenti/array-functions#bower",
   "moduleType": [
     "es6",
+    "globals",
     "node"
   ],
   "ignore": [
     "**/.*",
-    "node_modules",
     "bower_components",
     "test",
     "tests"
