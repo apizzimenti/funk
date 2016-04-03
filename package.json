@@ -15,7 +15,7 @@
   "bin": {
     "array-functions": "index.js"
   },
-  "preferGlobal": true,
+  "preferGlobal": false,
   "dependencies": {
     "chalk": "^1.1.3"
   }
