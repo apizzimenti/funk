@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * Created by apizzimenti on 4/2/16.
  */
