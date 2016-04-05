@@ -1,6 +1,6 @@
 {
   "name": "array_functions",
-  "version": "0.0.3",
+  "version": "1.0.4",
   "description": "Useful array functions",
   "main": "index.js",
   "scripts": {
