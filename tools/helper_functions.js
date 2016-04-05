@@ -3,12 +3,6 @@
  */
 
 /**
- * @ignore
- */
-
-var module = {};
-
-/**
  * @summary an implementation of quicksort used in removeIndex() to sort the array of indices
  *
  * @see removeIndex()
