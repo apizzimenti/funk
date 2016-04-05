@@ -4,63 +4,40 @@
  * Created by apizzimenti on 4/2/16.
  */
 
-function quicksort(array, l, r) {
+/**
+ * @ignore
+ */
 
-    var index;
+var h = require('./tools/helper_functions'),
+    module = {};
 
-    if (array.length > 1) {
+/**
+ * @summary Deletes value(s) from the specified index or list of indices.
+ *
+ * @param index {Number | Number[]} index or list of indices to be deleted
+ *
+ * @this current array object
+ *
+ * @throws RangeError
+ *
+ * @since 0.0.1
+ * @version 1.0.4
+ *
+ * @example
+ * var a = [1, 2, 3, 4, 5];
+ * a.removeIndex(2)
+ * // [ 1, 2, 4, 5 ]
+ *
+ * var b = [1, 2, 3, 4, 5];
+ * b.removeIndex([0, 1, 2]);
+ * // [ 4, 5 ]
+ */
 
-        index = partition(array, l, r);
-
-        if (l < index - 1) {
-            quicksort(array, l, index - 1);
-        }
-
-        if (index < r) {
-            quicksort(array, index, r);
-        }
-    }
-
-    return array;
-
-}
-
-function swap(array, first, second) {
-    var temp = array[first];
-    array[first] = array[second];
-    array[second] = temp;
-}
-
-function partition(array, l, r) {
-    var piv = array[Math.floor((l + r) / 2)],
-        i = l,
-        j = r;
-
-    while (i <= j) {
-
-        while (array[i] < piv) {
-            i++;
-        }
-
-        while (array[j] > piv) {
-            j--;
-        }
-
-        if (i <= j) {
-            swap(array, i, j);
-            i++;
-            j--;
-        }
-    }
-
-    return i;
-
-}
-Array.prototype.removeIndex = function (index) {
+var removeIndex = function (index) {
     var indices = Array.isArray(index) ? index : [index],
-        greatest_val = quicksort(indices, 0, indices.length - 1);
+        greatest_val = h._quicksort(indices, 0, indices.length - 1)[indices.length - 1];
 
-    if (indices.length > this.length || greatest_val[indices.length - 1] > this.length) {
+    if (indices.length > this.length || greatest_val > this.length) {
 
         throw new RangeError();
 
@@ -84,7 +61,31 @@ Array.prototype.removeIndex = function (index) {
     }
 };
 
-Array.prototype.removeValue = function (value) {
+Array.prototype.removeIndex = removeIndex;
+
+/**
+ * @summary Deletes all specified value(s) in an array.
+ *
+ * @param value {Number | Array} value or list of values to be deleted
+ *
+ * @this current array object
+ *
+ * @throws ReferenceError
+ *
+ * @since 0.0.1
+ * @version 1.0.4
+ *
+ * @example
+ * var a = [1, 2, 3, 4, 5];
+ * a.removeValue(3);
+ * // [ 1, 2, 4, 5 ]
+ *
+ * var b = [1, 2, 3, 4, 5];
+ * b.removeValue([2, 3, 5]);
+ * // [ 1, 4 ]
+ */
+
+var removeValue = function (value) {
     var vals = Array.isArray(value) ? value : [value],
         indices = [];
 
@@ -119,7 +120,11 @@ Array.prototype.removeValue = function (value) {
     }
 };
 
+Array.prototype.removeValue = removeValue;
+
 module.exports = {
-    removeIndex: Array.prototype.removeIndex,
-    removeValue: Array.prototype.removeValue
+    funk: {
+        removeIndex: Array.prototype.removeIndex,
+        removeValue: Array.prototype.removeValue
+    }
 };
