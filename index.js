@@ -11,12 +11,6 @@
 var h = require('./tools/helper_functions');
 
 /**
- * @ignore
- */
-
-var module = {};
-
-/**
  * @summary Deletes value(s) from the specified index or list of indices.
  *
  * @param index {Number | Number[]} index or list of indices to be deleted
@@ -41,7 +35,7 @@ var removeIndex = function (index) {
     var indices = Array.isArray(index) ? index : [index],
         greatest_val = h._quicksort(indices, 0, indices.length - 1)[indices.length - 1];
 
-    if (indices.length > this.length || greatest_val > this.length) {
+    if (indices.length > this.length || greatest_val > this.length - 1) {
 
         throw new RangeError();
 
@@ -124,10 +118,3 @@ var removeValue = function (value) {
 };
 
 Array.prototype.removeValue = removeValue;
-
-module.exports = {
-    funk: {
-        removeIndex: Array.prototype.removeIndex,
-        removeValue: Array.prototype.removeValue
-    }
-};
