@@ -4,7 +4,7 @@
 This package is a collection of useful array functions not provided in the current version of javascript.
 
 #### installation
-`bower install array-functions`
+`bower install da_funk`
 
 
 #### usage
