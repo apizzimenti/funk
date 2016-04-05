@@ -4,11 +4,11 @@
 This package is a collection of useful array functions not provided in the current version of javascript.
 
 #### installation
-`[sudo] npm install array_functions`
+`[sudo] npm install funk`
 
 
 #### usage
-    require('array_functions');
+    require('funk');
 
     var a = [1, 2, 3, 4];
     a.removeIndex(2);
