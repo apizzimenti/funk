@@ -5,74 +5,103 @@
 'use strict';
 
 /**
- * @desc removes the element at the specified index.
+ * @summary Deletes value(s) from the specified index or list of indices.
  *
- * @param index {Number} index to remove element from
+ * @param index {Number | Number[]} index or list of indices to be deleted
+ *
+ * @this current array object
+ *
+ * @throws RangeError
+ *
+ * @since 0.0.1
+ *
+ * @example
+ * var a = [1, 2, 3, 4, 5];
+ * a.removeIndex(2)
+ * // [ 1, 2, 4, 5 ]
+ *
+ * var b = [1, 2, 3, 4, 5];
+ * b.removeIndex([0, 1, 2]);
+ * // [ 4, 5 ]
  */
 
-Array.prototype.removeFromIndex = function (index) {
-    var length = this.length;
+var removeIndex = function (index) {
+    var indices = Array.isArray(index) ? index : [index],
+        greatest_val = h._quicksort(indices, 0, indices.length - 1)[indices.length - 1];
 
-    if (index > length) {
+    if (indices.length > this.length || greatest_val > this.length - 1) {
 
-        try {
-            throw new Error();
-        } catch (e) {
-            var stack = e.stack.split('\n'),
-                currStack = stack[2].replace(new RegExp('    '), '');
-
-            console.log('Error: Index out of bounds\n\t' + currStack);
-        }
-
-    } else {
-
-        for (var i = index; i < length - 1; i++) {
-            this[i] = this[i + 1];
-        }
-
-        delete this[length - 1];
-        this.length = length - 1;
-
-    }
-};
-
-/**
- * @desc removes all instances of the specified value.
- *
- * @param value {*} item to remove from array
- */
-
-Array.prototype.removeValue = function (value) {
-    var indices = [],
-        init_index = this.indexOf(value);
-
-    for (var item in this) {
-        if (this[item] === 2) {
-            indices.push(parseInt(item));
-        }
-    }
-
-    if (init_index === -1) {
-
-        try {
-            throw new Error();
-        } catch (e) {
-            var stack = e.stack.split('\n'),
-                currStack = stack[2].replace(new RegExp('    '), '');
-
-            console.log('ReferenceError: Specified value does not exist\n\t' + currStack);
-        }
+        throw new RangeError();
 
     } else {
 
         var amount_gone = 0;
 
         for (var i = 0; i < indices.length; i++) {
-            var index = indices[i] - amount_gone,
+            var curr_index = indices[i] - amount_gone,
                 length = this.length;
 
-            for (var j = index; j < length; j++) {
-                this[j] = this[j + 1];
+            for (var k = curr_index; k < length - 1; k++) {
+                this[k] = this[k + 1];
+            }
+
+            delete this[length - 1];
+            this.length = length - 1;
+            amount_gone++;
+        }
+
+    }
+};
+
+Array.prototype.removeIndex = removeIndex;
+
+/**
+ * @summary Deletes all specified value(s) in an array.
+ *
+ * @param value {Number | Array} value or list of values to be deleted
+ *
+ * @this current array object
+ *
+ * @throws ReferenceError
+ *
+ * @since 0.0.1
+ *
+ * @example
+ * var a = [1, 2, 3, 4, 5];
+ * a.removeValue(3);
+ * // [ 1, 2, 4, 5 ]
+ *
+ * var b = [1, 2, 3, 4, 5];
+ * b.removeValue([2, 3, 5]);
+ * // [ 1, 4 ]
+ */
+
+var removeValue = function (value) {
+    var vals = Array.isArray(value) ? value : [value],
+        indices = [];
+
+    for (var i = 0; i < vals.length; i++) {
+        for (var j = 0; j < this.length; j++) {
+            if (vals[i] === this[j]) {
+                indices.push(j);
+            }
+        }
+    }
+
+    if (indices.length === 0) {
+
+        throw new ReferenceError();
+
+    } else {
+
+        var amount_gone = 0;
+
+        for (var k = 0; k < indices.length; k++) {
+            var index = indices[k] - amount_gone,
+                length = this.length;
+
+            for (var l = index; l < length; l++) {
+                this[l] = this[l + 1];
             }
 
             delete this[length - 1];
@@ -81,3 +110,5 @@ Array.prototype.removeValue = function (value) {
         }
     }
 };
+
+Array.prototype.removeValue = removeValue;
