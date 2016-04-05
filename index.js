@@ -8,8 +8,13 @@
  * @ignore
  */
 
-var h = require('./tools/helper_functions'),
-    module = {};
+var h = require('./tools/helper_functions');
+
+/**
+ * @ignore
+ */
+
+var module = {};
 
 /**
  * @summary Deletes value(s) from the specified index or list of indices.
@@ -21,7 +26,6 @@ var h = require('./tools/helper_functions'),
  * @throws RangeError
  *
  * @since 0.0.1
- * @version 1.0.4
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
@@ -73,7 +77,6 @@ Array.prototype.removeIndex = removeIndex;
  * @throws ReferenceError
  *
  * @since 0.0.1
- * @version 1.0.4
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
