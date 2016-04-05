@@ -96,7 +96,3 @@ function _partition(array, l, r) {
     return i;
 
 }
-
-module.exports = {
-    _quicksort: _quicksort
-};
