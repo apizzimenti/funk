@@ -4,66 +4,112 @@
  * Created by apizzimenti on 4/2/16.
  */
 
-var //chalk = require('chalk'),
-    console = require('console');
+function quicksort(array, l, r) {
 
+    var index;
+
+    if (array.length > 1) {
+
+        index = partition(array, l, r);
+
+        if (l < index - 1) {
+            quicksort(array, l, index - 1);
+        }
+
+        if (index < r) {
+            quicksort(array, index, r);
+        }
+    }
+
+    return array;
+
+}
+
+function swap(array, first, second) {
+    var temp = array[first];
+    array[first] = array[second];
+    array[second] = temp;
+}
+
+function partition(array, l, r) {
+    var piv = array[Math.floor((l + r) / 2)],
+        i = l,
+        j = r;
+
+    while (i <= j) {
+
+        while (array[i] < piv) {
+            i++;
+        }
+
+        while (array[j] > piv) {
+            j--;
+        }
+
+        if (i <= j) {
+            swap(array, i, j);
+            i++;
+            j--;
+        }
+    }
+
+    return i;
+
+}
 Array.prototype.removeIndex = function (index) {
-    var length = this.length;
+    var indices = Array.isArray(index) ? index : [index],
+        greatest_val = quicksort(indices, 0, indices.length - 1);
 
-    if (index > length) {
+    if (indices.length > this.length || greatest_val[indices.length - 1] > this.length) {
 
-        try {
-            throw new Error();
-        } catch (e) {
-            var stack = e.stack.split('\n'),
-                currStack = stack[2].replace(new RegExp('    '), '');
-
-            console.log(chalk.red('Error: Index out of bounds\n\t' + currStack));
-        }
-
-    } else {
-
-        for (var i = index; i < length - 1; i++) {
-            this[i] = this[i + 1];
-        }
-
-        delete this[length - 1];
-        this.length = length - 1;
-
-    }
-};
-
-Array.prototype.removeValue = function (value) {
-    var indices = [],
-        init_index = this.indexOf(value);
-
-    for (var item in this) {
-        if (this[item] === 2) {
-            indices.push(parseInt(item));
-        }
-    }
-
-    if (init_index === -1) {
-
-        try {
-            throw new Error();
-        } catch (e) {
-            var stack = e.stack.split('\n'),
-                currStack = stack[2].replace(new RegExp('    '), '');
-
-            console.log('ReferenceError: Specified value does not exist\n\t' + currStack);
-        }
+        throw new RangeError();
 
     } else {
 
         var amount_gone = 0;
 
         for (var i = 0; i < indices.length; i++) {
-            var index = indices[i] - amount_gone,
+            var curr_index = indices[i] - amount_gone,
                 length = this.length;
 
-            for (var j = index; j < length; j++) {
-                this[j] = this[j + 1];
+            for (var k = curr_index; k < length - 1; k++) {
+                this[k] = this[k + 1];
+            }
+
+            delete this[length - 1];
+            this.length = length - 1;
+            amount_gone++;
+        }
+
+    }
+};
+
+Array.prototype.removeValue = function (value) {
+    var vals = Array.isArray(value) ? value : [value],
+        indices = [];
+
+    for (var i = 0; i < vals.length; i++) {
+        for (var j = 0; j < this.length; j++) {
+            if (vals[i] === this[j]) {
+                indices.push(j);
+            }
+        }
+    }
+
+    if (indices.length === 0) {
+
+        throw new ReferenceError();
+
+    } else {
+
+        var amount_gone = 0;
+
+        for (var k = 0; k < indices.length; k++) {
+            var index = indices[k] - amount_gone,
+                length = this.length;
+
+            for (var l = index; l < length; l++) {
+                this[l] = this[l + 1];
             }
 
             delete this[length - 1];
