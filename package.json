@@ -13,7 +13,7 @@
   "author": "Anthony Pizzimenti",
   "license": "MIT",
   "bin": {
-    "array-functions": "test.js"
+    "array-functions": "index.js"
   },
   "preferGlobal": false,
   "dependencies": {
