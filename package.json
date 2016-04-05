@@ -1,6 +1,6 @@
 {
   "name": "array_functions",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Useful array functions",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "author": "Anthony Pizzimenti",
   "license": "MIT",
   "bin": {
-    "array-functions": "index.js"
+    "array-functions": "test.js"
   },
   "preferGlobal": false,
   "dependencies": {
