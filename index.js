@@ -21,7 +21,7 @@ var h = require('./tools/helper_functions');
  *
  * @returns {Array}
  *
- * @since 0.0.1
+ * @since 1.0.1
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
@@ -79,7 +79,7 @@ Array.prototype.removeIndex = removeIndex;
  *
  * @returns {Array}
  *
- * @since 0.0.1
+ * @since 1.0.1
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
@@ -144,7 +144,7 @@ Array.prototype.removeValue = removeValue;
  *
  * @returns {Array}
  *
- * @since 1.0.5
+ * @since 1.0.6
  *
  * @example
  * var a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
