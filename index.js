@@ -4,6 +4,8 @@
 
 'use strict';
 
+import {_quicksort} from "tools/helper_functions";
+
 /**
  * @summary Deletes value(s) from the specified index or list of indices.
  *
@@ -33,7 +35,7 @@
 
 var removeIndex = function (index) {
     var indices = Array.isArray(index) ? index : [index],
-        greatest_val = h._quicksort(indices, 0, indices.length - 1)[indices.length - 1];
+        greatest_val = _quicksort(indices, 0, indices.length - 1)[indices.length - 1];
 
     if (indices.length > this.length || greatest_val > this.length - 1) {
 

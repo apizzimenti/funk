@@ -18,7 +18,7 @@
  * @private
  */
 
-function _quicksort(array, l, r) {
+export function _quicksort(array, l, r) {
 
     var index;
 
