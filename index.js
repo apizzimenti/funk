@@ -5,15 +5,17 @@
 'use strict';
 
 /**
- * @summary Deletes value(s) from the specified index or list of indices.
+ * @summary Deletes value(s) from the specified index or list of indices/
  *
  * @param index {Number | Number[]} index or list of indices to be deleted
  *
- * @this current array object
+ * @this {Array} current array object
  *
  * @throws RangeError
  *
- * @since 0.0.1
+ * @returns {Array}
+ *
+ * @since 1.0.1
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
@@ -23,6 +25,10 @@
  * var b = [1, 2, 3, 4, 5];
  * b.removeIndex([0, 1, 2]);
  * // [ 4, 5 ]
+ *
+ * var c = [1, 2, 3, 4, 5],
+ *     d = c.removeIndex(2);
+ * // [ 1, 2, 4, 5 ]
  */
 
 var removeIndex = function (index) {
@@ -49,8 +55,9 @@ var removeIndex = function (index) {
             this.length = length - 1;
             amount_gone++;
         }
-
     }
+
+    return this;
 };
 
 Array.prototype.removeIndex = removeIndex;
@@ -60,11 +67,13 @@ Array.prototype.removeIndex = removeIndex;
  *
  * @param value {Number | Array} value or list of values to be deleted
  *
- * @this current array object
+ * @this {Array} current array object
  *
  * @throws ReferenceError
  *
- * @since 0.0.1
+ * @returns {Array}
+ *
+ * @since 1.0.1
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
@@ -74,6 +83,11 @@ Array.prototype.removeIndex = removeIndex;
  * var b = [1, 2, 3, 4, 5];
  * b.removeValue([2, 3, 5]);
  * // [ 1, 4 ]
+ *
+ * var c = [1, 2, 3, 4, 5],
+ *     d = c.removeValue(3);
+ * // [ 1, 2, 4, 5 ]
+ *
  */
 
 var removeValue = function (value) {
@@ -109,6 +123,8 @@ var removeValue = function (value) {
             amount_gone++;
         }
     }
+
+    return this;
 };
 
 Array.prototype.removeValue = removeValue;
@@ -122,7 +138,7 @@ Array.prototype.removeValue = removeValue;
  *
  * @returns {Array}
  *
- * @since 1.0.5
+ * @since 1.0.6
  *
  * @example
  * var a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
