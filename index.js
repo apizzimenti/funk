@@ -11,7 +11,7 @@
 var h = require('./tools/helper_functions');
 
 /**
- * @summary Deletes value(s) from the specified index or list of indices/
+ * @summary Deletes value(s) from the specified index or list of indices.
  *
  * @param index {Number | Number[]} index or list of indices to be deleted
  *
