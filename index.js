@@ -158,7 +158,7 @@ Array.prototype.removeValue = removeValue;
 
 var groupByStep = function (step) {
 
-    var right = this.length % step,
+    const right = this.length % step,
         last_length = this.length - right;
 
     var step_array = [],
