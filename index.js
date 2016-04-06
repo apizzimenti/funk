@@ -154,13 +154,14 @@ Array.prototype.removeValue = removeValue;
 
 var groupByStep = function (step) {
 
-    var right = this.length % step,
-        last_length = this.length - right,
-        step_array = [],
+    const right = this.length % step,
+        last_length = this.length - right;
+
+    var step_array = [],
         last_array = [],
         index = 0;
 
-    for (var i = 0; i < this.length - right; i++) {
+    for (var i = 0; i < last_length; i++) {
 
         step_array.push(this[i]);
         index = Math.floor((i + 1) / step) - 1;
@@ -172,7 +173,7 @@ var groupByStep = function (step) {
         }
     }
 
-    for (var j = this.length - right; j < this.length; j++) {
+    for (var j = last_length; j < this.length; j++) {
         last_array.push(this[j]);
         delete this[j];
     }
@@ -184,7 +185,10 @@ var groupByStep = function (step) {
     }
 
     this.length = this.length / step;
-    this.push(last_array);
+
+    if (last_array.length < 0) {
+        this.push(last_array);
+    }
 
     return this;
 };
