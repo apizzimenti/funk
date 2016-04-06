@@ -144,7 +144,7 @@ Array.prototype.removeValue = removeValue;
  *
  * @returns {Array}
  *
- * @since 1.0.6
+ * @since 1.1.6
  *
  * @example
  * var a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
