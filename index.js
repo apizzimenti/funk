@@ -11,13 +11,15 @@
 var h = require('./tools/helper_functions');
 
 /**
- * @summary Deletes value(s) from the specified index or list of indices.
+ * @summary Deletes value(s) from the specified index or list of indices/
  *
  * @param index {Number | Number[]} index or list of indices to be deleted
  *
- * @this current array object
+ * @this {Array} current array object
  *
  * @throws RangeError
+ *
+ * @returns {Array}
  *
  * @since 0.0.1
  *
@@ -29,6 +31,10 @@ var h = require('./tools/helper_functions');
  * var b = [1, 2, 3, 4, 5];
  * b.removeIndex([0, 1, 2]);
  * // [ 4, 5 ]
+ *
+ * var c = [1, 2, 3, 4, 5],
+ *     d = c.removeIndex(2);
+ * // [ 1, 2, 4, 5 ]
  */
 
 var removeIndex = function (index) {
@@ -55,8 +61,9 @@ var removeIndex = function (index) {
             this.length = length - 1;
             amount_gone++;
         }
-
     }
+
+    return this;
 };
 
 Array.prototype.removeIndex = removeIndex;
@@ -66,9 +73,11 @@ Array.prototype.removeIndex = removeIndex;
  *
  * @param value {Number | Array} value or list of values to be deleted
  *
- * @this current array object
+ * @this {Array} current array object
  *
  * @throws ReferenceError
+ *
+ * @returns {Array}
  *
  * @since 0.0.1
  *
@@ -80,6 +89,11 @@ Array.prototype.removeIndex = removeIndex;
  * var b = [1, 2, 3, 4, 5];
  * b.removeValue([2, 3, 5]);
  * // [ 1, 4 ]
+ *
+ * var c = [1, 2, 3, 4, 5],
+ *     d = c.removeValue(3);
+ * // [ 1, 2, 4, 5 ]
+ *
  */
 
 var removeValue = function (value) {
@@ -115,6 +129,69 @@ var removeValue = function (value) {
             amount_gone++;
         }
     }
+
+    return this;
 };
 
 Array.prototype.removeValue = removeValue;
+
+/**
+ * @summary Groups the values of the array by step; groups array values into groups of size step.
+ *
+ * @param step {Number} size of group
+ *
+ * @this {Array} current Array object
+ *
+ * @returns {Array}
+ *
+ * @since 1.0.5
+ *
+ * @example
+ * var a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+ * a.groupByStep(3)
+ * // [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [10] ]
+ *
+ * var b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+ *     c = b.groupByStep(2)
+ * // [ [1, 2], [3, 4], [5, 6], [7, 8], [9, 10] ]
+ */
+
+var groupByStep = function (step) {
+
+    var right = this.length % step,
+        last_length = this.length - right,
+        step_array = [],
+        last_array = [],
+        index = 0;
+
+    for (var i = 0; i < this.length - right; i++) {
+
+        step_array.push(this[i]);
+        index = Math.floor((i + 1) / step) - 1;
+
+        if ((i + 1) % step === 0) {
+
+            this[index] = step_array;
+            step_array = [];
+        }
+    }
+
+    for (var j = this.length - right; j < this.length; j++) {
+        last_array.push(this[j]);
+        delete this[j];
+    }
+
+    this.length = last_length;
+
+    for (var k = last_length - last_array.length; k < last_length; k++) {
+        delete this[k];
+    }
+
+    this.length = this.length / step;
+    this.push(last_array);
+
+    return this;
+};
+
+Array.prototype.groupByStep = groupByStep;
+
