@@ -4,8 +4,6 @@
 
 'use strict';
 
-import {_quicksort} from "tools/helper_functions";
-
 /**
  * @summary Deletes value(s) from the specified index or list of indices.
  *
