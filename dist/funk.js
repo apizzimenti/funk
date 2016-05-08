@@ -1,6 +1,12 @@
 /*! funk - v1.1.9 - 2016-05-08
 * https://github.com/apizzimenti/funk#readme
 * Copyright (c) 2016 ; Licensed MIT */
+"use strict";
+
+/**
+ * Created by apizzimenti on 5/8/16.
+ */
+
 /**
  * @summary Groups the values of the array by step; groups array values into groups of size step.
  *
@@ -22,49 +28,56 @@
  * // [ [1, 2], [3, 4], [5, 6], [7, 8], [9, 10] ]
  */
 
-var groupByStep = function (step) {
-    
-    const right = this.length % step,
+var groupByStep = function groupByStep(step) {
+
+    var right = this.length % step,
         last_length = this.length - right;
-    
+
     var step_array = [],
         last_array = [],
         index = 0;
-    
+
     for (var i = 0; i < last_length; i++) {
-        
+
         step_array.push(this[i]);
         index = Math.floor((i + 1) / step) - 1;
-        
+
         if ((i + 1) % step === 0) {
-            
+
             this[index] = step_array;
             step_array = [];
         }
     }
-    
+
     for (var j = last_length; j < this.length; j++) {
         last_array.push(this[j]);
         delete this[j];
     }
-    
+
     this.length = last_length;
-    
+
     for (var k = last_length - last_array.length; k < last_length; k++) {
         delete this[k];
     }
-    
+
     this.length = this.length / step;
-    
+
     if (last_array.length < 0) {
         this.push(last_array);
     }
-    
+
     return this;
 };
 
 Array.prototype.groupByStep = groupByStep;
-import _quicksort from 'tools/quicksort'; 
+
+'use strict';
+
+var _quicksort2 = require('tools/quicksort');
+
+var _quicksort3 = _interopRequireDefault(_quicksort2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @summary Deletes value(s) from the specified index or list of indices.
@@ -93,36 +106,43 @@ import _quicksort from 'tools/quicksort';
  * // [ 1, 2, 4, 5 ]
  */
 
-var removeIndex = function (index) {
+var removeIndex = function removeIndex(index) {
     var indices = Array.isArray(index) ? index : [index],
-        greatest_val = _quicksort(indices, 0, indices.length - 1)[indices.length - 1];
-    
+        greatest_val = (0, _quicksort3.default)(indices, 0, indices.length - 1)[indices.length - 1];
+
     if (indices.length > this.length || greatest_val > this.length - 1) {
-        
+
         throw new RangeError();
-        
     } else {
-        
+
         var amount_gone = 0;
-        
+
         for (var i = 0; i < indices.length; i++) {
             var curr_index = indices[i] - amount_gone,
                 length = this.length;
-            
+
             for (var k = curr_index; k < length - 1; k++) {
                 this[k] = this[k + 1];
             }
-            
+
             delete this[length - 1];
             this.length = length - 1;
             amount_gone++;
         }
     }
-    
+
     return this;
-};
+}; /**
+    * Created by apizzimenti on 5/8/16.
+    */
 
 Array.prototype.removeIndex = removeIndex;
+
+"use strict";
+
+/**
+ * Created by apizzimenti on 5/8/16.
+ */
 
 /**
  * @summary Deletes all specified value(s) in an array.
@@ -152,7 +172,7 @@ Array.prototype.removeIndex = removeIndex;
  *
  */
 
-var removeValue = function (value) {
+var removeValue = function removeValue(value) {
     var vals = Array.isArray(value) ? value : [value],
         indices = [];
 
@@ -167,7 +187,6 @@ var removeValue = function (value) {
     if (indices.length === 0) {
 
         throw new ReferenceError();
-
     } else {
 
         var amount_gone = 0;
@@ -190,6 +209,15 @@ var removeValue = function (value) {
 };
 
 Array.prototype.removeValue = removeValue;
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Created by apizzimenti on 4/4/16.
+ */
 
 /**
  * @summary compartmentalized swap method for _quicksort
@@ -246,9 +274,7 @@ function _partition(array, l, r) {
     }
 
     return i;
-
 }
-
 
 /**
  * @summary an implementation of quicksort used in removeIndex() to sort the array of indices
@@ -284,8 +310,6 @@ function _quicksort(array, l, r) {
     }
 
     return array;
-
 }
 
-
-export default _quicksort;
+exports.default = _quicksort;
