@@ -19,7 +19,7 @@ module.exports = function (grunt) {
                 stripBanners: true
             },
             dist: {
-                src: ['src/**/*.js'],
+                src: ['dist/build/**/*.js'],
                 dest: 'dist/funk.js'
             }
         },
