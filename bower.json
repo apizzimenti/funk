@@ -1,7 +1,7 @@
 {
   "name": "array_functions",
   "description": "Useful array functions",
-  "main": "index.js",
+  "main": "dist/funk.js",
   "authors": [
     "Anthony Pizzimenti"
   ],
