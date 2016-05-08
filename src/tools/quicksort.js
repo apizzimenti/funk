@@ -3,43 +3,6 @@
  */
 
 /**
- * @summary an implementation of quicksort used in removeIndex() to sort the array of indices
- *
- * @see removeIndex()
- *
- * @param array {Array} array to be sorted
- * @param l {Number} leftmost index in current sort range
- * @param r {Number} rightmost index in current sort range
- *
- * @returns {Array}
- *
- * @since 1.0.4
- *
- * @private
- */
-
-export function _quicksort(array, l, r) {
-
-    var index;
-
-    if (array.length > 1) {
-
-        index = _partition(array, l, r);
-
-        if (l < index - 1) {
-            _quicksort(array, l, index - 1);
-        }
-
-        if (index < r) {
-            _quicksort(array, index, r);
-        }
-    }
-
-    return array;
-
-}
-
-/**
  * @summary compartmentalized swap method for _quicksort
  *
  * @param array {Array} array to have values swapped
@@ -96,3 +59,44 @@ function _partition(array, l, r) {
     return i;
 
 }
+
+
+/**
+ * @summary an implementation of quicksort used in removeIndex() to sort the array of indices
+ *
+ * @see removeIndex()
+ *
+ * @param array {Array} array to be sorted
+ * @param l {Number} leftmost index in current sort range
+ * @param r {Number} rightmost index in current sort range
+ *
+ * @returns {Array}
+ *
+ * @since 1.0.4
+ *
+ * @private
+ */
+
+function _quicksort(array, l, r) {
+
+    var index;
+
+    if (array.length > 1) {
+
+        index = _partition(array, l, r);
+
+        if (l < index - 1) {
+            _quicksort(array, l, index - 1);
+        }
+
+        if (index < r) {
+            _quicksort(array, index, r);
+        }
+    }
+
+    return array;
+
+}
+
+
+export default _quicksort;
