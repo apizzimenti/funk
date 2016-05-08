@@ -1,5 +1,5 @@
 ## da_funk
------
+---
 
 This package is a collection of useful array functions not provided in the current version of javascript.
 
