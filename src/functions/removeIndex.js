@@ -58,4 +58,3 @@ var removeIndex = function (index) {
     return this;
 };
 
-Array.prototype.removeIndex = removeIndex;

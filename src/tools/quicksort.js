@@ -97,6 +97,3 @@ function _quicksort(array, l, r) {
     return array;
 
 }
-
-
-export default _quicksort;

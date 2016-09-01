@@ -12,18 +12,18 @@
  *
  * @example
  * var a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
- * a.groupByStep(3)
+ * groupByStep(a, 3)
  * // [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [10] ]
  *
  * var b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
- *     c = b.groupByStep(2)
+ *     c = groupByStep(b, 2)
  * // [ [1, 2], [3, 4], [5, 6], [7, 8], [9, 10] ]
  */
 
-var groupByStep = function (step) {
+var groupBy = function (a, step) {
     
-    const right = this.length % step,
-        last_length = this.length - right;
+    const right = a.length % step,
+        last_length = a.length - right;
     
     var step_array = [],
         last_array = [],
@@ -31,32 +31,34 @@ var groupByStep = function (step) {
     
     for (var i = 0; i < last_length; i++) {
         
-        step_array.push(this[i]);
+        step_array.push(a[i]);
         index = Math.floor((i + 1) / step) - 1;
         
         if ((i + 1) % step === 0) {
             
-            this[index] = step_array;
+            a[index] = step_array;
             step_array = [];
         }
     }
     
-    for (var j = last_length; j < this.length; j++) {
-        last_array.push(this[j]);
-        delete this[j];
+    for (var j = last_length; j < a.length; j++) {
+        last_array.push(a[j]);
+        delete a[j];
     }
     
-    this.length = last_length;
+    a.length = last_length;
     
     for (var k = last_length - last_array.length; k < last_length; k++) {
-        delete this[k];
+        delete a[k];
     }
     
-    this.length = this.length / step;
+    a.length = a.length / step;
     
     if (last_array.length < 0) {
-        this.push(last_array);
+        a.push(last_array);
     }
     
-    return this;
+    return a;
 };
+
+f.groupBy
