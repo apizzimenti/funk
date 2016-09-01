@@ -1,36 +1,22 @@
 module.exports = function (grunt) {
-    'use strict';
+    "use strict";
     // Project configuration
     grunt.initConfig({
 
         // Metadata
-        pkg: grunt.file.readJSON('package.json'),
-
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-            '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-            ' Licensed <%= pkg.license %> */\n',
-
+        pkg: grunt.file.readJSON("package.json"),
         // Task configuration
         concat: {
-            options: {
-                banner: '<%= banner %>',
-                stripBanners: true
-            },
             dist: {
-                src: ['dist/build/**/*.js'],
-                dest: 'dist/funk.js'
+                src: ["dist/build/**/*.js"],
+                dest: "dist/funk.js"
             }
         },
 
         uglify: {
-            options: {
-                banner: '<%= banner %>'
-            },
             dist: {
-                src: '<%= concat.dist.dest %>',
-                dest: 'dist/funk.min.js'
+                src: "<%= concat.dist.dest %>",
+                dest: "dist/funk.min.js"
             }
         },
 
@@ -52,53 +38,44 @@ module.exports = function (grunt) {
                 esnext: true
             },
             gruntfile: {
-                src: 'gruntfile.js'
+                src: "gruntfile.js"
             },
             lib_test: {
-                src: ['src/**/*.js', 'test/**/*.js']
-            }
-        },
-
-        nodeunit: {
-            files: ['test/**/*_test.js']
-        },
-
-        watch: {
-            gruntfile: {
-                files: '<%= jshint.gruntfile.src %>',
-                tasks: ['jshint:gruntfile']
-            },
-            lib_test: {
-                files: '<%= jshint.lib_test.src %>',
-                tasks: ['jshint:lib_test', 'nodeunit']
+                src: ["src/**/*.js", "test/**/*.js"]
             }
         },
 
         babel: {
             options: {
-                presets: ['es2015'],
+                presets: ["es2015"],
                 sourceMap: false
             },
             dist: {
                 files: [{
                     expand: true,
-                    cwd: 'src/',
-                    src: ['**/*.js'],
-                    dest: 'dist/build/'
+                    cwd: "src/",
+                    src: ["**/*.js"],
+                    dest: "dist/compiled"
                 }]
             }
+        },
+
+        strictly: {
+            files: ["src/**/*.js"]
         }
     });
 
     // These plugins provide necessary tasks
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-nodeunit');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-babel');
+    grunt.loadNpmTasks("grunt-contrib-concat");
+    grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-nodeunit");
+    grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-babel");
+    grunt.loadNpmTasks("strictly");
 
     // Default task
-    grunt.registerTask('default', ['jshint', 'babel', 'concat']);
+    grunt.registerTask("strictly", ["strictly"]);
+    grunt.registerTask("default", ["jshint", "babel", "concat"]);
 };
 
