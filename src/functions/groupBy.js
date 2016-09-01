@@ -3,15 +3,12 @@
  */
 
 /**
- * @summary Groups the values of the array by step; groups array values into groups of size step.
+ * @summary Groups the values of the array in place by step; groups array values into groups of size step.
  *
- * @param step {Number} size of group
- *
- * @this {Array} current Array object
+ * @param a {*[]} Array to be grouped.
+ * @param step {Number} Group size.
  *
  * @returns {Array}
- *
- * @since 1.0.6
  *
  * @example
  * var a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -63,5 +60,3 @@ var groupByStep = function (step) {
     
     return this;
 };
-
-Array.prototype.groupByStep = groupByStep;

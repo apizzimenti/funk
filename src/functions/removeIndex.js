@@ -2,8 +2,6 @@
  * Created by apizzimenti on 5/8/16.
  */
 
-import _quicksort from 'tools/quicksort'; 
-
 /**
  * @summary Deletes value(s) from the specified index or list of indices.
  *
