@@ -3,24 +3,30 @@
  */
 
 /**
- * @summary Groups the values of the array in place by step; groups array values into groups of size step.
+ * @author Anthony Pizzimenti
+ *
+ * @desc Groups the values of the array in place by step; groups array values into groups of size step.
  *
  * @param a {*[]} Array to be grouped.
  * @param step {Number} Group size.
  *
  * @returns {Array}
  *
+ * @this f
+ *
  * @example
  * var a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
- * groupByStep(a, 3)
+ * f.groupByStep(a, 3)
  * // [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [10] ]
  *
  * var b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
- *     c = groupByStep(b, 2)
+ *     c = f.groupByStep(b, 2)
  * // [ [1, 2], [3, 4], [5, 6], [7, 8], [9, 10] ]
  */
 
-var groupBy = function (a, step) {
+f.groupBy = function (a, step) {
+    
+    this.lastArray = a.slice();
     
     const right = a.length % step,
         last_length = a.length - right;
@@ -60,5 +66,3 @@ var groupBy = function (a, step) {
     
     return a;
 };
-
-f.groupBy

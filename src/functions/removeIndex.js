@@ -3,37 +3,41 @@
  */
 
 /**
- * @summary Deletes value(s) from the specified index or list of indices.
+ * @author Anthony Pizzimenti
  *
+ * @desc Deletes value(s) from the specified index or list of indices in place.
+ *
+ * @param a {*[]} Array to have index removed.
  * @param index {Number | Number[]} index or list of indices to be deleted
  *
- * @this {Array} current array object
- *
  * @throws RangeError
- *
  * @returns {Array}
  *
- * @since 1.0.1
+ * @this f
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
- * a.removeIndex(2)
+ * f.removeIndex(a, 2)
  * // [ 1, 2, 4, 5 ]
  *
  * var b = [1, 2, 3, 4, 5];
- * b.removeIndex([0, 1, 2]);
+ * f.removeIndex(b, [0, 1, 2]);
  * // [ 4, 5 ]
  *
+ *
  * var c = [1, 2, 3, 4, 5],
- *     d = c.removeIndex(2);
+ *     d = f.removeIndex(c, 2);
  * // [ 1, 2, 4, 5 ]
  */
 
-var removeIndex = function (index) {
-    var indices = Array.isArray(index) ? index : [index],
-        greatest_val = _quicksort(indices, 0, indices.length - 1)[indices.length - 1];
+f.removeIndex = function (a, index) {
     
-    if (indices.length > this.length || greatest_val > this.length - 1) {
+    this.lastArray = a.slice();
+    
+    var indices = Array.isArray(index) ? index : [index],
+        greatest_val = quicksort(indices, 0, indices.length - 1)[indices.length - 1];
+    
+    if (indices.length > a.length || greatest_val > a.length - 1) {
         
         throw new RangeError();
         
@@ -43,18 +47,17 @@ var removeIndex = function (index) {
         
         for (var i = 0; i < indices.length; i++) {
             var curr_index = indices[i] - amount_gone,
-                length = this.length;
+                length = a.length;
             
             for (var k = curr_index; k < length - 1; k++) {
-                this[k] = this[k + 1];
+                a[k] = a[k + 1];
             }
             
-            delete this[length - 1];
-            this.length = length - 1;
+            delete a[length - 1];
+            a.length = length - 1;
             amount_gone++;
         }
     }
     
-    return this;
+    return a;
 };
-

@@ -3,7 +3,9 @@
  */
 
 /**
- * @summary Deletes all specified value(s) in an array.
+ * @author Anthony Pizzimenti
+ *
+ * @desc Deletes all specified value(s) in an array.
  *
  * @param a {*[]} Array to have value removed.
  * @param value {Number | Array} value or list of values to be deleted
@@ -12,7 +14,7 @@
  *
  * @returns {Array}
  *
- * @since 1.0.1
+ * @this f
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
@@ -29,7 +31,10 @@
  *
  */
 
-var removeValue = function (a, value) {
+f.removeValue = function (a, value) {
+    
+    this.lastArray = a.slice();
+    
     var vals = Array.isArray(value) ? value : [value],
         indices = [];
 
@@ -65,5 +70,3 @@ var removeValue = function (a, value) {
 
     return a;
 };
-
-f.removeValue = removeValue;
