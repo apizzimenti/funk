@@ -9,7 +9,7 @@ module.exports = function (grunt) {
         // Task configuration
         concat: {
             dist: {
-                src: ["dist/compiled/**/*.js"],
+                src: ["dist/compiled/index.js", "dist/compiled/**/*.js"],
                 dest: "dist/funk.js"
             }
         },
