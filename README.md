@@ -1,5 +1,5 @@
 ## da_funk
------
+---
 
 This package is a collection of useful array functions not provided in the current version of javascript.
 
@@ -18,5 +18,4 @@ And you're all good. No variables, no namespace, just `require` it and you're se
 
 #### bower:
 With bower, it's even simpler: just start using it.
-
 

@@ -1,0 +1,30 @@
+{
+  "name": "array_functions",
+  "description": "Useful array functions",
+  "main": "dist/funk.js",
+  "authors": [
+    "Anthony Pizzimenti"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "arrays",
+    "array",
+    "function",
+    "prototype",
+    "remove",
+    "index",
+    "value"
+  ],
+  "homepage": "https://github.com/apizzimenti/funk.git",
+  "moduleType": [
+    "es6",
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
