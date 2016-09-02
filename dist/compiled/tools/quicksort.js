@@ -1,8 +1,5 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 /**
  * Created by apizzimenti on 4/4/16.
  */
@@ -99,5 +96,3 @@ function _quicksort(array, l, r) {
 
     return array;
 }
-
-exports.default = _quicksort;
