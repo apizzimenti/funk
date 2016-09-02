@@ -1,3 +1,4 @@
+
 module.exports = function (grunt) {
     "use strict";
     // Project configuration
@@ -8,7 +9,7 @@ module.exports = function (grunt) {
         // Task configuration
         concat: {
             dist: {
-                src: ["dist/build/**/*.js"],
+                src: ["dist/compiled/**/*.js"],
                 dest: "dist/funk.js"
             }
         },
@@ -17,31 +18,6 @@ module.exports = function (grunt) {
             dist: {
                 src: "<%= concat.dist.dest %>",
                 dest: "dist/funk.min.js"
-            }
-        },
-
-        jshint: {
-            options: {
-                node: true,
-                curly: true,
-                eqeqeq: true,
-                immed: true,
-                latedef: true,
-                newcap: true,
-                noarg: true,
-                sub: true,
-                undef: true,
-                unused: true,
-                eqnull: true,
-                globals: { jQuery: true },
-                boss: true,
-                esnext: true
-            },
-            gruntfile: {
-                src: "gruntfile.js"
-            },
-            lib_test: {
-                src: ["src/**/*.js", "test/**/*.js"]
             }
         },
 
@@ -76,6 +52,6 @@ module.exports = function (grunt) {
 
     // Default task
     grunt.registerTask("strictly", ["strictly"]);
-    grunt.registerTask("default", ["jshint", "babel", "concat"]);
+    grunt.registerTask("default", ["babel", "concat", "uglify"]);
 };
 
