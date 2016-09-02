@@ -3,15 +3,13 @@
  */
 
 /**
- * @summary compartmentalized swap method for _quicksort
+ * @author Anthony Pizzimenti
+ *
+ * @desc compartmentalized swap method for _quicksort
  *
  * @param array {Array} array to have values swapped
  * @param first {Number} index of lower value
  * @param second {Number} index of higher value
- *
- * @since 1.0.4
- *
- * @private
  */
 
 function _swap(array, first, second) {
@@ -21,16 +19,14 @@ function _swap(array, first, second) {
 }
 
 /**
- * @summary sorts partitions of inputted array
+ * @author Anthony Pizzimenti
+ *
+ * @desc sorts partitions of inputted array
  * @param array {Array} array (or partition) to be sorted
  * @param l {Number} lower index
  * @param r {Number} upper index
  *
  * @returns {Number}
- *
- * @since 1.0.4
- *
- * @private
  */
 
 function _partition(array, l, r) {
@@ -62,7 +58,9 @@ function _partition(array, l, r) {
 
 
 /**
- * @summary an implementation of quicksort used in removeIndex() to sort the array of indices
+ * @author Anthony Pizzimenti
+ *
+ * @desc an implementation of quicksort used in removeIndex() to sort the array of indices
  *
  * @see removeIndex()
  *
@@ -71,13 +69,9 @@ function _partition(array, l, r) {
  * @param r {Number} rightmost index in current sort range
  *
  * @returns {Array}
- *
- * @since 1.0.4
- *
- * @private
  */
 
-function _quicksort(array, l, r) {
+function quicksort(array, l, r) {
 
     var index;
 
@@ -86,14 +80,14 @@ function _quicksort(array, l, r) {
         index = _partition(array, l, r);
 
         if (l < index - 1) {
-            _quicksort(array, l, index - 1);
+            quicksort(array, l, index - 1);
         }
 
         if (index < r) {
-            _quicksort(array, index, r);
+            quicksort(array, index, r);
         }
     }
 
     return array;
-
+    
 }
