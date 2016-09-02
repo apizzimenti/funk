@@ -14,6 +14,8 @@
  *
  * @returns {Array}
  *
+ * @memberOf f
+ *
  * @this f
  *
  * @example
@@ -33,6 +35,7 @@
 
 f.removeValue = function (a, value) {
     
+    this.throwError(a);
     this.lastArray = a.slice();
     
     var vals = Array.isArray(value) ? value : [value],

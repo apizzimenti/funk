@@ -10,10 +10,15 @@
  * @param a {*[]} Array to be searched.
  *
  * @returns {boolean} Does the array contain any blank, undefined, or null members?
+ *
+ * @memberOf f
+ *
+ * @this f
  */
 
 f.containsBlank = function (a) {
     
+    this.throwError(a);
     this.lastArray = a.slice();
     
     var blank = false;

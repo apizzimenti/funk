@@ -13,6 +13,8 @@
  * @throws RangeError
  * @returns {Array}
  *
+ * @memberOf f
+ *
  * @this f
  *
  * @example
@@ -32,6 +34,7 @@
 
 f.removeIndex = function (a, index) {
     
+    this.throwError(a);
     this.lastArray = a.slice();
     
     var indices = Array.isArray(index) ? index : [index],

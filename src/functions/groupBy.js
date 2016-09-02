@@ -12,6 +12,8 @@
  *
  * @returns {Array}
  *
+ * @memberOf f
+ *
  * @this f
  *
  * @example
@@ -26,6 +28,7 @@
 
 f.groupBy = function (a, step) {
     
+    this.throwError(a);
     this.lastArray = a.slice();
     
     const right = a.length % step,
