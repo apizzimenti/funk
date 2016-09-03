@@ -13,7 +13,9 @@
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-include-source": "^1.0.0",
+    "grunt-jsdoc": "^2.1.0",
     "jsdoc": "^3.4.0",
+    "minami": "^1.1.1",
     "strictly": "^1.1.9"
   },
   "description": "-----",
