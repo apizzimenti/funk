@@ -2,10 +2,9 @@
 
 This package is a collection of useful array functions not provided in the current version of javascript.
 
-### installation
-node: `$ [sudo] npm install da_funk`
+### features
 
-bower: `$ bower install da_funk`
-
-### easy usage
-All that's required to use this package is: nothing. Just start using it.
+* All methods operate on the array in-place, so reassigning variables and taking up extra memory isn't necessary
+* Both the `f` object and its methods are static, so there is no need to call `new f()` - simply start using it (i.e.
+`f.removeValue(1)`)
+* [Comprehensive documentation is available](http://apizzimenti.github.io/funk-docs/)
