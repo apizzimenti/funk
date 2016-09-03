@@ -42,7 +42,7 @@ module.exports = function (grunt) {
     
         jsdoc: {
             dist: {
-                src: ["lib/**/**/*.js"],
+                src: ["README.md", "lib/**/*.js"],
                 options: {
                     destination: "../funk-docs/",
                     template: "node_modules/minami"
