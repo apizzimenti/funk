@@ -6,6 +6,25 @@ function test(a) {
     document.getElementById("test").innerText = a;
 }
 
-var testArray = [6, 2, 4, 1, 5, [2, ["3"]], 3];
+function dump (o, t) {
+    var dumped = ``;
+    
+    for (var p in o) {
+        
+        if (o.hasOwnProperty(p)) {
+            
+            if (o[p] != null && typeof(o[p]) === "object") {
+                dumped += `${p}: { ${dump(o[p])} }, `;
+            } else {
+                dumped += `${p}: ${o[p]}, `;
+            }
+        }
+    }
+    
+    return dumped.slice(0, dumped.length - 2);
+}
 
-test(f.hasType(testArray, "object", true));
+var testArray = [1, 2, 3, 4, 5, 6],
+    list = new dList();
+
+console.dir(f.sList(testArray));
