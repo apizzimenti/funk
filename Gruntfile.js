@@ -29,7 +29,7 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: "src/",
+                    cwd: "lib/",
                     src: ["**/*.js"],
                     dest: "dist/compiled"
                 }]
@@ -38,6 +38,16 @@ module.exports = function (grunt) {
 
         strictly: {
             files: ["src/**/*.js"]
+        },
+    
+        jsdoc: {
+            dist: {
+                src: ["lib/**/**/*.js"],
+                options: {
+                    destination: "../funk-docs/",
+                    template: "node_modules/minami"
+                }
+            }
         }
     });
 
@@ -49,6 +59,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-babel");
     grunt.loadNpmTasks("strictly");
+    grunt.loadNpmTasks("grunt-jsdoc");
 
     // Default task
     grunt.registerTask("strictly", ["strictly"]);
