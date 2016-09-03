@@ -128,7 +128,7 @@ f.dList = function (a) {
  * // [ [1, 2], [3, 4], [5, 6], [7, 8], [9, 10] ]
  */
 
-f.groupBy = function (a, step) {
+f.group = function (a, step) {
 
     this.throwError(a);
     this.lastArray = a.slice();
@@ -167,6 +167,56 @@ f.groupBy = function (a, step) {
 
     if (last_array.length < 0) {
         a.push(last_array);
+    }
+
+    return a;
+};
+
+"use strict";
+
+/**
+ * Created by apizzimenti on 9/3/16.
+ */
+
+f.groupByValue = function (a, check) {
+
+    if (check === undefined) {
+        check = false;
+    }
+
+    this.throwError(a);
+
+    if (a.length > 23) {
+        a = quicksort(a, 0, a.length - 1);
+    } else {
+        a = a.sort();
+    }
+
+    var refArray = [],
+        refIndex = 0;
+
+    for (var i = 0; i < a.length - 1; i++) {
+
+        if (a[i] === a[i + 1]) {
+            refArray.push(a[i]);
+        } else {
+            refArray.push(a[i]);
+            a[refIndex] = refArray;
+            refArray = [];
+            refIndex++;
+
+            if (i === a.length - 2) {
+                a[refIndex] = [a[i + 1]];
+            }
+        }
+    }
+
+    for (var j = 0; j < a.length; j++) {
+
+        if (!Array.isArray(a[j])) {
+            delete a[j];
+            a.length--;
+        }
     }
 
     return a;
@@ -604,7 +654,7 @@ dList.prototype.remove = function (position) {
  *
  * @this dList
  *
- * @returns Node
+ * @returns {Node | Boolean}
  */
 
 dList.prototype.retrieve = function (position) {
@@ -868,7 +918,7 @@ sList.prototype.add = function (value, position) {
  *
  * @this sList
  *
- * @returns Node
+ * @returns {Node | Boolean}
  */
 
 sList.prototype.retrieve = function (position) {

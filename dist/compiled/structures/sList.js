@@ -127,7 +127,7 @@ sList.prototype.add = function (value, position) {
  *
  * @this sList
  *
- * @returns Node
+ * @returns {Node | Boolean}
  */
 
 sList.prototype.retrieve = function (position) {

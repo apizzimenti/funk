@@ -26,7 +26,7 @@
  * // [ [1, 2], [3, 4], [5, 6], [7, 8], [9, 10] ]
  */
 
-f.groupBy = function (a, step) {
+f.group = function (a, step) {
 
     this.throwError(a);
     this.lastArray = a.slice();

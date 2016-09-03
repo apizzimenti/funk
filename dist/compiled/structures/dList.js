@@ -175,7 +175,7 @@ dList.prototype.remove = function (position) {
  *
  * @this dList
  *
- * @returns Node
+ * @returns {Node | Boolean}
  */
 
 dList.prototype.retrieve = function (position) {
