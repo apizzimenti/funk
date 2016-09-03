@@ -3,6 +3,13 @@ module.exports = function (grunt) {
     "use strict";
     // Project configuration
     grunt.initConfig({
+        
+        app: {
+            scripts: [
+                "lib/index.js",
+                "lib/**/*.js"
+            ]
+        },
 
         // Metadata
         pkg: grunt.file.readJSON("package.json"),
@@ -37,7 +44,7 @@ module.exports = function (grunt) {
         },
 
         strictly: {
-            files: ["src/**/*.js"]
+            files: ["lib/**/*.js"]
         },
     
         jsdoc: {
@@ -48,7 +55,26 @@ module.exports = function (grunt) {
                     template: "node_modules/minami"
                 }
             }
+        },
+        
+        includeSource: {
+            
+            options: {
+                basepath: "lib/",
+                baseUrl: "",
+                ordering: "",
+                rename: function (dest, match, options) {
+                    return "../" + match;
+                }
+            },
+            
+            target: {
+                files: {
+                    "test/index.html" : "test/index.html"
+                }
+            }
         }
+        
     });
 
     // These plugins provide necessary tasks
@@ -60,9 +86,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-babel");
     grunt.loadNpmTasks("strictly");
     grunt.loadNpmTasks("grunt-jsdoc");
+    grunt.loadNpmTasks("grunt-include-source");
 
     // Default task
-    grunt.registerTask("strictly", ["strictly"]);
     grunt.registerTask("default", ["babel", "concat", "uglify"]);
 };
 
