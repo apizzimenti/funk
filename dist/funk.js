@@ -178,11 +178,18 @@ f.group = function (a, step) {
  * Created by apizzimenti on 9/3/16.
  */
 
-f.groupByValue = function (a, check) {
+/**
+ * @author Anthony Pizzimeti
+ *
+ * @desc Sorts the elements of the array and groups them in place. Does not apply typechecking, so values will be
+ * coerced.
+ *
+ * @param a {Array} Array to be grouped.
+ *
+ * @returns {*}
+ */
 
-    if (check === undefined) {
-        check = false;
-    }
+f.groupByValue = function (a) {
 
     this.throwError(a);
 
@@ -192,26 +199,30 @@ f.groupByValue = function (a, check) {
         a = a.sort();
     }
 
-    var refArray = [],
+    var i = 0,
+        j = 0,
+        refArray = [],
         refIndex = 0;
 
-    for (var i = 0; i < a.length - 1; i++) {
+    for (i = 0; i < a.length; i++) {
 
-        if (a[i] === a[i + 1]) {
+        if (a[i] == a[i + 1]) {
             refArray.push(a[i]);
         } else {
             refArray.push(a[i]);
             a[refIndex] = refArray;
-            refArray = [];
             refIndex++;
 
-            if (i === a.length - 2) {
+            if (i == a.length - 2 && refArray.length != 0) {
                 a[refIndex] = [a[i + 1]];
+                break;
             }
+
+            refArray = [];
         }
     }
 
-    for (var j = 0; j < a.length; j++) {
+    for (j = 0; j < a.length; j++) {
 
         if (!Array.isArray(a[j])) {
             delete a[j];
