@@ -7,18 +7,16 @@
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Deletes all specified value(s) in an array.
+ * @desc Deletes all specified value(s) in an array in place.
  *
  * @param a {Array} Array to have value removed.
  * @param value {Number | Array} value or list of values to be deleted
  *
  * @throws ReferenceError
  *
- * @returns {Array}
- *
- *
- *
  * @this f
+ *
+ * @returns {Array}
  *
  * @example
  * var a = [1, 2, 3, 4, 5];

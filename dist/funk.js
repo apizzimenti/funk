@@ -116,8 +116,6 @@ f.dList = function (a) {
  *
  * @returns {Array}
  *
- *
- *
  * @this f
  *
  * @example
@@ -194,8 +192,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * @this f
  *
  * @returns {boolean}
- *
- *
  */
 
 f.hasType = function (a, type, recursive) {
@@ -247,11 +243,10 @@ f.hasType = function (a, type, recursive) {
  * @param index {Number | Number[]} index or list of indices to be deleted
  *
  * @throws RangeError
- * @returns {Array}
- *
- *
  *
  * @this f
+ *
+ * @returns {Array}
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
@@ -309,18 +304,16 @@ f.removeIndex = function (a, index) {
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Deletes all specified value(s) in an array.
+ * @desc Deletes all specified value(s) in an array in place.
  *
  * @param a {Array} Array to have value removed.
  * @param value {Number | Array} value or list of values to be deleted
  *
  * @throws ReferenceError
  *
- * @returns {Array}
- *
- *
- *
  * @this f
+ *
+ * @returns {Array}
  *
  * @example
  * var a = [1, 2, 3, 4, 5];
@@ -620,7 +613,7 @@ dList.prototype.retrieve = function (position) {
         i = 0;
 
     if (position > this._length || position < 0) {
-        throw new Error("Index out of range.");
+        return false;
     }
 
     while (i < position) {
@@ -884,7 +877,7 @@ sList.prototype.retrieve = function (position) {
         i = 0;
 
     if (position > this._length || position < 0) {
-        throw new Error("Index out of range.");
+        return false;
     }
 
     while (i < position) {

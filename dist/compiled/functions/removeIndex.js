@@ -13,11 +13,10 @@
  * @param index {Number | Number[]} index or list of indices to be deleted
  *
  * @throws RangeError
- * @returns {Array}
- *
- *
  *
  * @this f
+ *
+ * @returns {Array}
  *
  * @example
  * var a = [1, 2, 3, 4, 5];

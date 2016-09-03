@@ -184,7 +184,7 @@ dList.prototype.retrieve = function (position) {
         i = 0;
 
     if (position > this._length || position < 0) {
-        throw new Error("Index out of range.");
+        return false;
     }
 
     while (i < position) {

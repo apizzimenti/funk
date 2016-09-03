@@ -18,8 +18,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * @this f
  *
  * @returns {boolean}
- *
- *
  */
 
 f.hasType = function (a, type, recursive) {

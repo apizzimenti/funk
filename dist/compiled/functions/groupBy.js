@@ -14,8 +14,6 @@
  *
  * @returns {Array}
  *
- *
- *
  * @this f
  *
  * @example
