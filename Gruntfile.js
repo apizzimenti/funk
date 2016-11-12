@@ -46,6 +46,9 @@ module.exports = function (grunt) {
         strictly: {
             files: ["lib/**/*.js"]
         },
+        
+        clean: ["dist/**/*"],
+        
     
         jsdoc: {
             dist: {
@@ -83,12 +86,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-nodeunit");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-babel");
     grunt.loadNpmTasks("strictly");
     grunt.loadNpmTasks("grunt-jsdoc");
     grunt.loadNpmTasks("grunt-include-source");
 
     // Default task
-    grunt.registerTask("default", ["babel", "concat", "uglify"]);
+    grunt.registerTask("default", ["clean", "babel", "concat", "uglify"]);
 };
 
