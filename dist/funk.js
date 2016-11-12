@@ -165,7 +165,7 @@ f.group = function (a, step) {
 
     a.length = a.length / step;
 
-    if (last_array.length < 0) {
+    if (last_array.length > 0) {
         a.push(last_array);
     }
 
@@ -187,6 +187,8 @@ f.group = function (a, step) {
  * @param a {Array} Array to be grouped.
  *
  * @returns {*}
+ *
+ * @todo implement in O(n) complexity with a while loop
  */
 
 f.groupByValue = function (a) {
@@ -560,7 +562,7 @@ dList.prototype.addToHead = function (value) {
 dList.prototype.addToTail = function (value) {
 
     var node = new Node(value),
-        refNode = this.retrieve(this._length - 1);
+        refNode = this.pop(this._length - 1);
 
     if (!refNode) {
         this._head = node;
@@ -600,8 +602,8 @@ dList.prototype.add = function (value, position) {
     }
 
     var node = new Node(value),
-        lastNode = this.retrieve(position - 1),
-        nextNode = this.retrieve(position + 1);
+        lastNode = this.pop(position - 1),
+        nextNode = this.pop(position + 1);
 
     lastNode.next = node;
     nextNode.previous = node;
@@ -637,8 +639,8 @@ dList.prototype.remove = function (position) {
 
     if (position > 0 && position < this._length - 1) {
 
-        lastNode = this.retrieve(position - 1);
-        nextNode = this.retrieve(position + 1);
+        lastNode = this.pop(position - 1);
+        nextNode = this.pop(position + 1);
 
         remNode = null;
         lastNode.next = nextNode;
@@ -649,7 +651,7 @@ dList.prototype.remove = function (position) {
         currentNode = null;
     } else if (position === this._length - 1) {
 
-        currentNode = this.retrieve(position - 1);
+        currentNode = this.pop(position - 1);
         currentNode.next = null;
     }
 
@@ -668,7 +670,7 @@ dList.prototype.remove = function (position) {
  * @returns {Node | Boolean}
  */
 
-dList.prototype.retrieve = function (position) {
+dList.prototype.pop = function (position) {
 
     var currentNode = this._head,
         i = 0;
@@ -837,7 +839,7 @@ function sList() {
  * @this sList
  */
 
-sList.prototype.addToTail = function (value) {
+sList.prototype.push = function (value) {
 
     var node = new Node(value),
         currentNode = this._head;
@@ -848,7 +850,7 @@ sList.prototype.addToTail = function (value) {
         return node;
     }
 
-    currentNode = this.retrieve(this._length - 1);
+    currentNode = this.pop(this._length - 1);
     currentNode.next = node;
 
     this._length++;
@@ -867,7 +869,7 @@ sList.prototype.addToTail = function (value) {
  * @this sList
  */
 
-sList.prototype.addToHead = function (value) {
+sList.prototype.unshift = function (value) {
 
     var node = new Node(value),
         currentNode = this._head;
@@ -898,7 +900,7 @@ sList.prototype.addToHead = function (value) {
  * @this sList
  */
 
-sList.prototype.add = function (value, position) {
+sList.prototype.insert = function (value, position) {
 
     if (position > this._length) {
         throw new Error("Index out of range.");
@@ -909,8 +911,8 @@ sList.prototype.add = function (value, position) {
     }
 
     var node = new Node(value),
-        lastNode = this.retrieve(position - 1),
-        nextNode = this.retrieve(position + 1);
+        lastNode = this.pop(position - 1),
+        nextNode = this.pop(position + 1);
 
     this._length++;
 
@@ -925,14 +927,18 @@ sList.prototype.add = function (value, position) {
  *
  * @desc Retrieves the Node at the specified positon.
  *
- * @param position {Number} Position to retrieve Node from.
+ * @param [position=length] {Number} Position to retrieve Node from.
  *
  * @this sList
  *
  * @returns {Node | Boolean}
  */
 
-sList.prototype.retrieve = function (position) {
+sList.prototype.pop = function (position) {
+
+    if (position == undefined) {
+        position = this._length;
+    }
 
     var currentNode = this._head,
         i = 0;
@@ -972,8 +978,8 @@ sList.prototype.remove = function (position) {
 
     if (position > 0 && position < this._length - 1) {
 
-        lastNode = this.retrieve(position - 1);
-        nextNode = this.retrieve(position + 1);
+        lastNode = this.pop(position - 1);
+        nextNode = this.pop(position + 1);
 
         remNode = null;
         lastNode.next = nextNode;
@@ -983,7 +989,7 @@ sList.prototype.remove = function (position) {
         currentNode = null;
     } else if (position === this._length - 1) {
 
-        currentNode = this.retrieve(position - 1);
+        currentNode = this.pop(position - 1);
         currentNode.next = null;
     }
 

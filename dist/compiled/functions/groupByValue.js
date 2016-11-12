@@ -13,6 +13,8 @@
  * @param a {Array} Array to be grouped.
  *
  * @returns {*}
+ *
+ * @todo implement in O(n) complexity with a while loop
  */
 
 f.groupByValue = function (a) {

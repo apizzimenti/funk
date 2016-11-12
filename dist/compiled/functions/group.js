@@ -63,7 +63,7 @@ f.group = function (a, step) {
 
     a.length = a.length / step;
 
-    if (last_array.length < 0) {
+    if (last_array.length > 0) {
         a.push(last_array);
     }
 
