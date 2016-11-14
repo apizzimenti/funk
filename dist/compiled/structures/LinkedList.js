@@ -13,11 +13,11 @@
  * @property _length {Number} The number of linked Node objects.
  *
  * @class {object} A singly linked list.
- * @this sList
+ * @this LinkedList
  * @constructor
  */
 
-function sList() {
+function LinkedList() {
 
     this._head = null;
     this._length = 0;
@@ -26,16 +26,16 @@ function sList() {
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Adds a new Node to the head of the current sList.
+ * @desc Adds a new Node to the head of the current LinkedList.
  *
  * @param value {*} Value to be assigned to the new Node.
  *
  * @returns {Node}
  *
- * @this sList
+ * @this LinkedList
  */
 
-sList.prototype.push = function (value) {
+LinkedList.prototype.push = function (value) {
 
     var node = new Node(value),
         currentNode = this._head;
@@ -56,16 +56,16 @@ sList.prototype.push = function (value) {
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Adds a new Node to the tail of the current sList.
+ * @desc Adds a new Node to the tail of the current LinkedList.
  *
  * @param value {*} Value to be assigned to the new Node.
  *
  * @returns {Node}
  *
- * @this sList
+ * @this LinkedList
  */
 
-sList.prototype.unshift = function (value) {
+LinkedList.prototype.unshift = function (value) {
 
     var node = new Node(value),
         currentNode = this._head;
@@ -93,10 +93,10 @@ sList.prototype.unshift = function (value) {
  *
  * @returns {Node}
  *
- * @this sList
+ * @this LinkedList
  */
 
-sList.prototype.insert = function (value, position) {
+LinkedList.prototype.insert = function (value, position) {
 
     if (position > this._length) {
         throw new Error("Index out of range.");
@@ -125,12 +125,12 @@ sList.prototype.insert = function (value, position) {
  *
  * @param [position=length] {Number} Position to retrieve Node from.
  *
- * @this sList
+ * @this LinkedList
  *
  * @returns {Node | Boolean}
  */
 
-sList.prototype.pop = function (position) {
+LinkedList.prototype.pop = function (position) {
 
     if (position == undefined) {
         position = this._length;
@@ -158,10 +158,10 @@ sList.prototype.pop = function (position) {
  *
  * @param position {Number} Position from which the Node will be removed.
  *
- * @this sList
+ * @this LinkedList
  */
 
-sList.prototype.remove = function (position) {
+LinkedList.prototype.remove = function (position) {
 
     var currentNode = this._head,
         remNode,
@@ -197,12 +197,12 @@ sList.prototype.remove = function (position) {
  *
  * @desc Transforms the linked list into an array.
  *
- * @this sList
+ * @this LinkedList
  *
  * @returns {Array}
  */
 
-sList.prototype.toArray = function () {
+LinkedList.prototype.toArray = function () {
 
     var a = [],
         node = this._head,

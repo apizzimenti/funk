@@ -73,6 +73,10 @@ function _partition(array, l, r) {
 
 function quicksort(array, l, r) {
 
+    if (r == undefined || l == undefined) {
+        console.warn("Missing one or both sort boundaries.");
+    }
+
     var index;
 
     if (array.length > 1) {

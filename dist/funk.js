@@ -31,6 +31,57 @@ var f = {
 "use strict";
 
 /**
+ * Created by apizzimenti on 11/12/16.
+ */
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Removes all duplicates from the specified array.
+ *
+ * @param array {Array} Array to be cleaned.
+ * @param check {boolean} Strict types with comparisons?
+ *
+ * @returns {Array}
+ *
+ * @this f
+ *
+ * @example
+ *
+ * var a = [1, 2, 3, 4, 5, "2", "3"];
+ * f.clean(a)
+ * // a = [1, "2", "3", 4, 5]
+ *
+ * var b = [1, 2, 3, 4, 5, "2", "3"];
+ * f.clean(b, true);
+ * // b = [1, "2", 2, 3, "3", 4, 5]
+ */
+
+f.clean = function (array, check) {
+
+    // sort array so index checking is easier
+    quicksort(array, 0, array.length - 1);
+
+    // initialize indexer
+    var i = 0;
+
+    while (i < array.length) {
+
+        if (f.equalWithCheck(a[i], a[i + 1], check)) {
+            // if adjacent indices are the same, remove next element and don't increase index
+            f.removeIndex(array, i + 1);
+            continue;
+        }
+
+        i++;
+    }
+
+    return array;
+};
+
+"use strict";
+
+/**
  * Created by apizzimenti on 9/2/16.
  */
 
@@ -69,35 +120,31 @@ f.containsBlank = function (a) {
 "use strict";
 
 /**
- * Created by apizzimenti on 9/3/16.
+ * Created by apizzimenti on 11/12/16.
  */
 
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Transforms the provided array to a doubly linked list.
+ * @desc Tests equality between two comparable objects with weak or strong typechecking. Mostly to be used
+ * internally.
  *
- * @param a {Array} Array to be transformed.
+ * @param val_1 {*} First value.
+ * @param val_2 {*} Second value.
+ * @param check {boolean} Strong or weak typechecking?
+ *
+ * @returns {boolean}
  *
  * @this f
- *
- * @returns {dList}
  */
 
-f.dList = function (a) {
+f.equalWithCheck = function (val_1, val_2, check) {
 
-    var d = new dList();
-
-    for (var i = 0; i < a.length; i++) {
-
-        if (i === 0) {
-            d.addToHead(a[i]);
-        } else {
-            d.addToTail(a[i]);
-        }
+    if (!check) {
+        return val_1 == val_2;
+    } else {
+        return val_1 === val_2;
     }
-
-    return d;
 };
 
 "use strict";
@@ -436,6 +483,40 @@ f.removeValue = function (a, value) {
 "use strict";
 
 /**
+ * Created by apizzimenti on 9/3/16.
+ */
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Transforms the provided array to a doubly linked list.
+ *
+ * @param a {Array} Array to be transformed.
+ *
+ * @this f
+ *
+ * @returns {DoublyLinkedList}
+ */
+
+f.DoublyLinkedList = function (a) {
+
+    var d = new DoublyLinkedList();
+
+    for (var i = 0; i < a.length; i++) {
+
+        if (i === 0) {
+            d.addToHead(a[i]);
+        } else {
+            d.addToTail(a[i]);
+        }
+    }
+
+    return d;
+};
+
+"use strict";
+
+/**
  * Created by apizzimenti on 9/2/16.
  */
 
@@ -448,12 +529,12 @@ f.removeValue = function (a, value) {
  *
  * @this f
  *
- * @returns {sList}
+ * @returns {LinkedList}
  */
 
-f.sList = function (a) {
+f.LinkedList = function (a) {
 
-    var s = new sList();
+    var s = new LinkedList();
 
     for (var i = 0; i < a.length; i++) {
 
@@ -476,40 +557,17 @@ f.sList = function (a) {
 /**
  * @author Anthony Pizzimenti
  *
- * @param value {*} Value of any type to be attributed to the node.
- *
- * @property value {*} Value of this Node.
- * @property [previous=null] {Node} In a doubly linked list, this points to the previous node in the list.
- * @property [next=null] {Node} In both doubly and singly linked lists, this points to the next node in the list.
- * @constructor
- */
-
-function Node(value) {
-  this.value = value;
-  this.previous = null;
-  this.next = null;
-}
-
-"use strict";
-
-/**
- * Created by apizzimenti on 9/2/16.
- */
-
-/**
- * @author Anthony Pizzimenti
- *
  * @desc A doubly linked list.
  *
  * @property _head {Node} The Node object at the head of the list.
  * @property _length {Number} The number of linked Node objects.
  *
  * @class {Object} Doubly linked list.
- * @this dList
+ * @this DoublyLinkedList
  * @constructor
  */
 
-function dList() {
+function DoublyLinkedList() {
     this._head = null;
     this._length = 0;
 }
@@ -517,16 +575,16 @@ function dList() {
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Adds a new Node to the head of the dList.
+ * @desc Adds a new Node to the head of the DoublyLinkedList.
  *
  * @param value {*} Value to be assigned to the new Node.
  *
- * @this dList
+ * @this DoublyLinkedList
  *
  * @returns {Node}
  */
 
-dList.prototype.addToHead = function (value) {
+DoublyLinkedList.prototype.addToHead = function (value) {
 
     var node = new Node(value),
         currentNode = this._head,
@@ -550,16 +608,16 @@ dList.prototype.addToHead = function (value) {
 /**
  * @author Anthony Pizzimenti
  *
- * @desc Adds a new Node to the tail of the dList.
+ * @desc Adds a new Node to the tail of the DoublyLinkedList.
  *
  * @param value {*} Value to be assigned to the new Node.
  *
- * @this dList
+ * @this DoublyLinkedList
  *
  * @returns {Node}
  */
 
-dList.prototype.addToTail = function (value) {
+DoublyLinkedList.prototype.addToTail = function (value) {
 
     var node = new Node(value),
         refNode = this.pop(this._length - 1);
@@ -586,12 +644,12 @@ dList.prototype.addToTail = function (value) {
  * @param value {*} Value to be assigned to the new Node.
  * @param position {Number} Position in the linked list.
  *
- * @this dList
+ * @this DoublyLinkedList
  *
  * @returns {Node}
  */
 
-dList.prototype.add = function (value, position) {
+DoublyLinkedList.prototype.add = function (value, position) {
 
     if (position > this._length) {
         throw new Error("Index out of range.");
@@ -623,10 +681,10 @@ dList.prototype.add = function (value, position) {
  *
  * @param position {Number} Position from which the Node will be removed.
  *
- * @this dList
+ * @this DoublyLinkedList
  */
 
-dList.prototype.remove = function (position) {
+DoublyLinkedList.prototype.remove = function (position) {
 
     var currentNode = this._head,
         remNode,
@@ -665,12 +723,12 @@ dList.prototype.remove = function (position) {
  *
  * @param position {Number} Position to retrieve the Node from.
  *
- * @this dList
+ * @this DoublyLinkedList
  *
  * @returns {Node | Boolean}
  */
 
-dList.prototype.pop = function (position) {
+DoublyLinkedList.prototype.pop = function (position) {
 
     var currentNode = this._head,
         i = 0;
@@ -694,7 +752,7 @@ dList.prototype.pop = function (position) {
  * @returns {Array}
  */
 
-dList.prototype.toArray = function () {
+DoublyLinkedList.prototype.toArray = function () {
 
     var a = [],
         node = this._head,
@@ -708,6 +766,262 @@ dList.prototype.toArray = function () {
 
     return a;
 };
+
+"use strict";
+
+/**
+ * Created by apizzimenti on 11/14/16.
+ */
+
+function Iterable() {
+  this.counter = 0;
+}
+
+Iterable.prototype.next = function () {};
+
+Iterable.prototype.hasNext = function () {};
+
+"use strict";
+
+/**
+ * Created by apizzimenti on 9/2/16.
+ */
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc A singly linked list.
+ *
+ * @property _head {Node} The Node object at the head of the list.
+ * @property _length {Number} The number of linked Node objects.
+ *
+ * @class {object} A singly linked list.
+ * @this LinkedList
+ * @constructor
+ */
+
+function LinkedList() {
+
+    this._head = null;
+    this._length = 0;
+}
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Adds a new Node to the head of the current LinkedList.
+ *
+ * @param value {*} Value to be assigned to the new Node.
+ *
+ * @returns {Node}
+ *
+ * @this LinkedList
+ */
+
+LinkedList.prototype.push = function (value) {
+
+    var node = new Node(value),
+        currentNode = this._head;
+
+    if (!currentNode) {
+        this._head = node;
+        this._length++;
+        return node;
+    }
+
+    currentNode = this.pop(this._length - 1);
+    currentNode.next = node;
+
+    this._length++;
+    return node;
+};
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Adds a new Node to the tail of the current LinkedList.
+ *
+ * @param value {*} Value to be assigned to the new Node.
+ *
+ * @returns {Node}
+ *
+ * @this LinkedList
+ */
+
+LinkedList.prototype.unshift = function (value) {
+
+    var node = new Node(value),
+        currentNode = this._head;
+
+    if (!currentNode) {
+        this._head = node;
+        this._length++;
+        return node;
+    }
+
+    node.next = currentNode;
+    this._head = node;
+
+    this._length++;
+    return node;
+};
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Adds a new Node at the provided position.
+ *
+ * @param value {*} Value to be assigned to the new Node.
+ * @param position {Number} Position in the linked list.
+ *
+ * @returns {Node}
+ *
+ * @this LinkedList
+ */
+
+LinkedList.prototype.insert = function (value, position) {
+
+    if (position > this._length) {
+        throw new Error("Index out of range.");
+    } else if (position === 0) {
+        return this.addToHead(value);
+    } else if (position === this._length - 1) {
+        return this.addToTail(value);
+    }
+
+    var node = new Node(value),
+        lastNode = this.pop(position - 1),
+        nextNode = this.pop(position + 1);
+
+    this._length++;
+
+    lastNode.next = node;
+    node.next = nextNode;
+
+    return node;
+};
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Retrieves the Node at the specified positon.
+ *
+ * @param [position=length] {Number} Position to retrieve Node from.
+ *
+ * @this LinkedList
+ *
+ * @returns {Node | Boolean}
+ */
+
+LinkedList.prototype.pop = function (position) {
+
+    if (position == undefined) {
+        position = this._length;
+    }
+
+    var currentNode = this._head,
+        i = 0;
+
+    if (position > this._length || position < 0) {
+        return false;
+    }
+
+    while (i < position) {
+        currentNode = currentNode.next;
+        i++;
+    }
+
+    return currentNode;
+};
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Removes the Node at the specified position.
+ *
+ * @param position {Number} Position from which the Node will be removed.
+ *
+ * @this LinkedList
+ */
+
+LinkedList.prototype.remove = function (position) {
+
+    var currentNode = this._head,
+        remNode,
+        lastNode,
+        nextNode;
+
+    if (position > this._length) {
+        throw new Error("Index out of range.");
+    }
+
+    if (position > 0 && position < this._length - 1) {
+
+        lastNode = this.pop(position - 1);
+        nextNode = this.pop(position + 1);
+
+        remNode = null;
+        lastNode.next = nextNode;
+    } else if (position === 0) {
+
+        this._head = currentNode.next;
+        currentNode = null;
+    } else if (position === this._length - 1) {
+
+        currentNode = this.pop(position - 1);
+        currentNode.next = null;
+    }
+
+    this._length--;
+};
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @desc Transforms the linked list into an array.
+ *
+ * @this LinkedList
+ *
+ * @returns {Array}
+ */
+
+LinkedList.prototype.toArray = function () {
+
+    var a = [],
+        node = this._head,
+        i = 0;
+
+    while (i < this._length) {
+        a.push(node.value);
+        node = node.next;
+        i++;
+    }
+
+    return a;
+};
+
+"use strict";
+
+/**
+ * Created by apizzimenti on 9/2/16.
+ */
+
+/**
+ * @author Anthony Pizzimenti
+ *
+ * @param value {*} Value of any type to be attributed to the node.
+ *
+ * @property value {*} Value of this Node.
+ * @property [previous=null] {Node} In a doubly linked list, this points to the previous node in the list.
+ * @property [next=null] {Node} In both doubly and singly linked lists, this points to the next node in the list.
+ * @constructor
+ */
+
+function Node(value) {
+  this.value = value;
+  this.previous = null;
+  this.next = null;
+}
 
 "use strict";
 
@@ -784,6 +1098,10 @@ function _partition(array, l, r) {
 
 function quicksort(array, l, r) {
 
+    if (r == undefined || l == undefined) {
+        console.warn("Missing one or both sort boundaries.");
+    }
+
     var index;
 
     if (array.length > 1) {
@@ -801,222 +1119,3 @@ function quicksort(array, l, r) {
 
     return array;
 }
-
-"use strict";
-
-/**
- * Created by apizzimenti on 9/2/16.
- */
-
-/**
- * @author Anthony Pizzimenti
- *
- * @desc A singly linked list.
- *
- * @property _head {Node} The Node object at the head of the list.
- * @property _length {Number} The number of linked Node objects.
- *
- * @class {object} A singly linked list.
- * @this sList
- * @constructor
- */
-
-function sList() {
-
-    this._head = null;
-    this._length = 0;
-}
-
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Adds a new Node to the head of the current sList.
- *
- * @param value {*} Value to be assigned to the new Node.
- *
- * @returns {Node}
- *
- * @this sList
- */
-
-sList.prototype.push = function (value) {
-
-    var node = new Node(value),
-        currentNode = this._head;
-
-    if (!currentNode) {
-        this._head = node;
-        this._length++;
-        return node;
-    }
-
-    currentNode = this.pop(this._length - 1);
-    currentNode.next = node;
-
-    this._length++;
-    return node;
-};
-
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Adds a new Node to the tail of the current sList.
- *
- * @param value {*} Value to be assigned to the new Node.
- *
- * @returns {Node}
- *
- * @this sList
- */
-
-sList.prototype.unshift = function (value) {
-
-    var node = new Node(value),
-        currentNode = this._head;
-
-    if (!currentNode) {
-        this._head = node;
-        this._length++;
-        return node;
-    }
-
-    node.next = currentNode;
-    this._head = node;
-
-    this._length++;
-    return node;
-};
-
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Adds a new Node at the provided position.
- *
- * @param value {*} Value to be assigned to the new Node.
- * @param position {Number} Position in the linked list.
- *
- * @returns {Node}
- *
- * @this sList
- */
-
-sList.prototype.insert = function (value, position) {
-
-    if (position > this._length) {
-        throw new Error("Index out of range.");
-    } else if (position === 0) {
-        return this.addToHead(value);
-    } else if (position === this._length - 1) {
-        return this.addToTail(value);
-    }
-
-    var node = new Node(value),
-        lastNode = this.pop(position - 1),
-        nextNode = this.pop(position + 1);
-
-    this._length++;
-
-    lastNode.next = node;
-    node.next = nextNode;
-
-    return node;
-};
-
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Retrieves the Node at the specified positon.
- *
- * @param [position=length] {Number} Position to retrieve Node from.
- *
- * @this sList
- *
- * @returns {Node | Boolean}
- */
-
-sList.prototype.pop = function (position) {
-
-    if (position == undefined) {
-        position = this._length;
-    }
-
-    var currentNode = this._head,
-        i = 0;
-
-    if (position > this._length || position < 0) {
-        return false;
-    }
-
-    while (i < position) {
-        currentNode = currentNode.next;
-        i++;
-    }
-
-    return currentNode;
-};
-
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Removes the Node at the specified position.
- *
- * @param position {Number} Position from which the Node will be removed.
- *
- * @this sList
- */
-
-sList.prototype.remove = function (position) {
-
-    var currentNode = this._head,
-        remNode,
-        lastNode,
-        nextNode;
-
-    if (position > this._length) {
-        throw new Error("Index out of range.");
-    }
-
-    if (position > 0 && position < this._length - 1) {
-
-        lastNode = this.pop(position - 1);
-        nextNode = this.pop(position + 1);
-
-        remNode = null;
-        lastNode.next = nextNode;
-    } else if (position === 0) {
-
-        this._head = currentNode.next;
-        currentNode = null;
-    } else if (position === this._length - 1) {
-
-        currentNode = this.pop(position - 1);
-        currentNode.next = null;
-    }
-
-    this._length--;
-};
-
-/**
- * @author Anthony Pizzimenti
- *
- * @desc Transforms the linked list into an array.
- *
- * @this sList
- *
- * @returns {Array}
- */
-
-sList.prototype.toArray = function () {
-
-    var a = [],
-        node = this._head,
-        i = 0;
-
-    while (i < this._length) {
-        a.push(node.value);
-        node = node.next;
-        i++;
-    }
-
-    return a;
-};
