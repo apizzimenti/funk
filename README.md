@@ -1,16 +1,34 @@
-## da_funk
+## Installation
+Quick and easy. Also on yarn.
 
-This package is a collection of useful array functions not provided in the current version of javascript.
+`$ npm install da_funk [--save[-dev]]` or `$ yarn add da_funk`
 
-### installation
+## Functionality
+`funk` does its work in-place and without dependencies. All functions are static, and there
+are factory methods to create linked lists (and doubly-linked lists), so everything is operational right
+out of the box - no setup required.
 
-`$ bower install da_funk [--save[-dev]]`
+## Usage
+```
+var funk = require("da_funk"),
+    a = [1, 2, 3, 4];
+    
+// grouping
+funk.methods.group(a, 2);
+// >>> a = [ [1, 2], [3, 4] ]
 
-`$ git clone https://github.com/apizzimenti/funk.git`
-
-### features
-
-* All methods operate on the array in-place, so reassigning variables and taking up extra memory isn't necessary
-* Both the `f` object and its methods are static, so there is no need to call `new f()` - simply start using it (i.e.
-`f.removeValue(1)`)
-* [Comprehensive documentation is available](http://apizzimenti.github.io/funk-docs/)
+// linked list
+var ll = funk.objects.LinkedList(a);
+// >>> LinkedList {
+           _head: Node {
+               value: 1,
+               previous: null,
+               next: Node {
+                   value: 2,
+                   previous: null,
+                   next: ... 
+               }
+           },
+           _length: 4
+       }
+```

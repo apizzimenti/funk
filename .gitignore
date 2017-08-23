@@ -3,3 +3,6 @@ node_modules
 conf.json
 .yo-rc.json
 test/
+.eslintignore
+.eslintrc.json
+package-lock.json

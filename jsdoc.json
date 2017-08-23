@@ -1,0 +1,12 @@
+{
+  "source": {
+    "include": ["README.md", "lib/"],
+    "exclude": ["lib/functions/objects"]
+  },
+
+  "opts": {
+    "template": "node_modules/minami",
+    "destination": "../funk-docs",
+    "recurse": "true"
+  }
+}
